@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "framer": "^2.4.1",
     "next": "^14.2.15",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0"
   },
   "scripts": {
     "dev": "next dev",
