@@ -9,6 +9,7 @@ const projects: ProjectCardProps[] = [
     description:
       "A raytracing engine built with OpenGL and C++, featuring a custom scene format and a custom renderer.",
     image_link: "/phys_eng.png",
+    tags: ["C++", "OpenGL", "GLSL"],
   },
   {
     title: "Aggie Events",
@@ -16,6 +17,23 @@ const projects: ProjectCardProps[] = [
     description:
       "A crowdsourced event platform for the Texas A&M campus, featuring event creation, RSVPs, and a calendar view.",
     image_link: "/agev.png",
+    tags: [
+      "Docker",
+      "NextJS",
+      "React",
+      "TypeScript",
+      "PostgreSQL",
+      "Express",
+      "PassportJS",
+    ],
+  },
+  {
+    title: "Taichi Raytracer",
+    date: "2021",
+    description:
+      "A raytracing engine built with Taichi, featuring a custom scene format and a custom renderer.",
+    image_link: "/taichi.png",
+    tags: ["Python", "CUDA", "Taichi"],
   },
 ];
 
@@ -46,8 +64,8 @@ export default function Home() {
         </div>
       </div>
       <div className="flex my-3">
-        <div className="basis-1/2">
-          <h2 className="text-3xl text-center">Projects</h2>
+        <div className="basis-1/2 grow-0 shrink-0 ">
+          <h2 className="text-3xl text-center font-semibold">Projects</h2>
           <div className="flex flex-col gap-2 p-2">
             {projects.map((project, index) => (
               <ProjectCard
@@ -56,12 +74,13 @@ export default function Home() {
                 date={project.date}
                 description={project.description}
                 image_link={project.image_link}
+                tags={project.tags}
               />
             ))}
           </div>
         </div>
-        <div className="basis-1/2">
-          <h2 className="text-3xl text-center">Blog</h2>
+        <div className="basis-1/2 grow-0 shrink-0">
+          <h2 className="text-3xl text-center font-semibold">Blog</h2>
         </div>
       </div>
     </>
