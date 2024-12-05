@@ -5,7 +5,7 @@ import { projects } from "@/lib/projects";
 
 export default function Home() {
   return (
-    <>
+    <div className="p-2">
       <div className="md:flex flex-row text-black place-content-center p-7 gap-5">
         <div className="basis-3/5">
           <h1 className="text-4xl font-bold w-fit">Howdy!</h1>
@@ -42,6 +42,6 @@ export default function Home() {
           <h2 className="text-3xl text-center font-semibold">Blog</h2>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className="bg-gray-950 justify-center flex">
         <div className="w-full lg:w-[1000px] lg:my-4">
           <Header />
-          <div className="p-2 bg-white lg:rounded-b-md">
+          <div className="bg-white lg:rounded-b-md">
             {children}
             <Footer />
           </div>
