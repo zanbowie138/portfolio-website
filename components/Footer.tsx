@@ -10,7 +10,7 @@ export default function Footer() {
         className="text-blue-600 text-sm"
       >
         <FaGithub className="inline mx-1 mb-1" />
-        Source code
+        Website
       </a>
     </div>
   );

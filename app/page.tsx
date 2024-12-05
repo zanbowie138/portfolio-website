@@ -1,46 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import ProjectCard, { ProjectCardProps } from "@/components/ProjectCard";
-
-const projects: ProjectCardProps[] = [
-  {
-    title: "OpenGL Raytracing Engine",
-    date: "2022 - Present",
-    description:
-      "A raytracing engine built with OpenGL and C++, featuring a custom scene format and a custom renderer.",
-    image_link: "/phys_eng.png",
-    tags: ["C++", "OpenGL", "GLSL"],
-  },
-  {
-    title: "Aggie Events",
-    date: "2024 - Present",
-    description:
-      "A crowdsourced event platform for the Texas A&M campus, featuring event creation, RSVPs, and a calendar view.",
-    image_link: "/agev.png",
-    tags: [
-      "Docker",
-      "NextJS",
-      "React",
-      "TypeScript",
-      "PostgreSQL",
-      "Express",
-      "PassportJS",
-    ],
-  },
-  {
-    title: "Taichi Raytracer",
-    date: "2021",
-    description:
-      "A raytracing engine built with Taichi, featuring a custom scene format and a custom renderer.",
-    image_link: "/taichi.png",
-    tags: ["Python", "CUDA", "Taichi"],
-  },
-];
+import { projects } from "@/lib/projects";
 
 export default function Home() {
   return (
     <>
-      <div className="flex flex-row text-black place-content-center p-7 gap-5">
+      <div className="md:flex flex-row text-black place-content-center p-7 gap-5">
         <div className="basis-3/5">
           <h1 className="text-4xl font-bold w-fit">Howdy!</h1>
           <p className="text-black text-lg">
@@ -58,24 +24,17 @@ export default function Home() {
             alt="logo"
             width="200"
             height="200"
-            className="rounded-full h-min bg-black p-1 m-auto"
+            className="rounded-2xl h-min bg-black p-1 m-auto"
             priority={true}
           />
         </div>
       </div>
-      <div className="flex my-3">
+      <div className="md:w-full flex my-3">
         <div className="basis-1/2 grow-0 shrink-0 ">
           <h2 className="text-3xl text-center font-semibold">Projects</h2>
-          <div className="flex flex-col gap-2 p-2">
+          <div className="flex flex-col gap-2 p-2 w-full">
             {projects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                title={project.title}
-                date={project.date}
-                description={project.description}
-                image_link={project.image_link}
-                tags={project.tags}
-              />
+              <ProjectCard key={index} project={project as ProjectCardProps} />
             ))}
           </div>
         </div>
