@@ -27,7 +27,7 @@ export function getProjectData(): ProjectProps[] {
 
   // Sort by date
   return projData.sort((a, b) => {
-    return a.date < b.date ? 1 : -1;
+    return (a.priority ?? 0) < (b.priority ?? 0) ? 1 : -1;
   });
 }
 

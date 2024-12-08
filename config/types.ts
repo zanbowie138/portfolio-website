@@ -6,5 +6,6 @@ export interface ProjectProps {
   description: string;
   image_link: string;
   button_link?: string;
+  priority?: number;
   tags?: string[];
 }
