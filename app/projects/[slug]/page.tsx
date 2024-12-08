@@ -18,14 +18,16 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/*    className="object-cover p-2"*/}
       {/*  />*/}
       {/*</div>*/}
-      <ProjectCarousel />
+      {/*<ProjectCarousel />*/}
       <div className="p-3">
         <h1 className="font-semibold text-4xl">{project.title}</h1>
         <Markdown className="prose">{project.content}</Markdown>
       </div>
     </>
   ) : (
-    <div></div>
+    <div>
+      <h1>404: Project Not Found</h1>
+    </div>
   );
 }
 

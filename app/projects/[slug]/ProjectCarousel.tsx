@@ -23,7 +23,7 @@ const responsive = {
 
 export interface ProjectCarouselProps {}
 
-export default function ProjectCarousel() {
+export default function ProjectCarousel({}: ProjectCarouselProps) {
   return (
     <Carousel responsive={responsive}>
       <div>Item 1</div>

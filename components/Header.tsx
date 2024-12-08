@@ -4,7 +4,8 @@ const links: { href: string; label: string }[] = [
   { href: "/", label: "Home" },
   // { href: "/blog", label: "Blog" },
   { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
+  // { href: "/about", label: "About" },
+  { href: "/resume.pdf", label: "Resume" },
   { href: "/contact", label: "Contact" },
 ];
 
