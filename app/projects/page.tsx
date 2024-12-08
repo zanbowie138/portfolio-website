@@ -24,10 +24,10 @@ export default function Projects() {
               </h2>
               <p>{project.description}</p>
             </div>
-            <div className="flex">
+            <div className="flex flex-wrap">
               {project.tags &&
                 project.tags.map((tag) => (
-                  <div key={tag} className="mr-1">
+                  <div key={tag} className="mr-1 my-[1px]">
                     <div className="bg-slate-700 text-white rounded-md px-2 py-[2px] text-xs font-semibold">
                       {tag}
                     </div>

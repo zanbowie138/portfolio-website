@@ -23,11 +23,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-gray-950 justify-center flex">
-        <div className="w-full lg:w-[1000px] lg:my-4">
+      <body className="bg-gray-950 justify-center flex min-h-screen">
+        <div className="w-full lg:h-fit lg:w-[1000px] lg:my-4 flex flex-col">
           <Header />
-          <div className="bg-white lg:rounded-b-md">
-            {children}
+          <div className="bg-white lg:rounded-b-md flex flex-col grow">
+            <div className="grow">{children}</div>
             <Footer />
           </div>
         </div>
