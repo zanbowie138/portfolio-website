@@ -4,6 +4,7 @@ import { IoMenu } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer";
+import Link from "next/link";
 
 const links: { href: string; label: string }[] = [
   { href: "/", label: "Home" },
@@ -36,7 +37,7 @@ export default function Header() {
   return (
     <div className="flex bg-slate-800 p-3 rounded-t-md">
       <nav className="flex items-center justify-between w-full px-2">
-        <a href="/">
+        <Link href="/">
           <Image
             src="/profile.jpg"
             alt="logo"
@@ -45,16 +46,16 @@ export default function Header() {
             className="rounded-full mr-5 bg-slate-600 p-0.5 hover:bg-slate-700"
             priority={true}
           />
-        </a>
+        </Link>
         <ul className="hidden md:flex">
           {links.map((link, index) => (
             <li className="flex-auto" key={index}>
-              <a
+              <Link
                 href={link.href}
                 className="text-white text-xl mr-7 hover:underline underline-offset-4 font-semibold"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
