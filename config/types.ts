@@ -2,7 +2,7 @@ export interface ProjectProps {
   id: string;
   title: string;
   content: string;
-  date: string;
+  date_range: string;
   description: string;
   image_link: string;
   button_link?: string;
@@ -14,7 +14,7 @@ export interface BlogLinkProps {
   id: string;
   title: string;
   content: string;
-  date: string;
+  date_range: string;
   description: string;
   image_link: string;
   button_link?: string;

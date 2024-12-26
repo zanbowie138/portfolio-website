@@ -1,6 +1,6 @@
 ---
 title: "Aggie Events"
-date: "2024 - Present"
+date_range: "2024 - Present"
 description: "A crowdsourced full-stack event platform for the Texas A&M campus, featuring event creation, advanced searching, and user authentication."
 image_link: "/agev.png"
 button_link: "https://aggieevents.tech"

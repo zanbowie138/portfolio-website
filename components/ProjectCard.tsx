@@ -8,7 +8,7 @@ import Link from "next/link";
 export interface ProjectCardProps {
   id: string;
   title: string;
-  date: string;
+  date_range: string;
   description: string;
   image_link: string;
   button_link?: string;
@@ -55,7 +55,7 @@ export default function ProjectCard({
                 >
                   {project.title}
                 </motion.h3>
-                <h2 className="text-gray-700 text-xs">{project.date}</h2>
+                <h2 className="text-gray-700 text-xs">{project.date_range}</h2>
                 <p className="text-sm ">{project.description}</p>
               </div>
               <div>
