@@ -15,9 +15,9 @@ export default function DynamicProjectPage({ params }: { params: { slug: string 
   );
 }
 
-// export const dynamicParams = false;
-// export async function generateStaticParams() {
-//   return projects.map((p) => ({
-//     slug: p.id,
-//   }));
-// }
+export const dynamicParams = false;
+export async function generateStaticParams() {
+  return projects.map((p) => ({
+    slug: p.id,
+  }));
+}
