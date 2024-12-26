@@ -6,3 +6,5 @@ image_link: "/taichi.png"
 priority: "1"
 tags: ["Python", "CUDA", "Taichi"]
 ---
+
+### [Github Repo](https://github.com/zanbowie138/Taichi-Raytracer)

@@ -44,7 +44,7 @@ export default function HomePage({ projects }: { projects: ProjectProps[] }) {
           <div className="md:w-full flex my-3 justify-center">
             <div className="grow-0 py-3 px-5" id="projects">
               <h3 className="text-3xl font-bold">Featured Projects</h3>
-              <h4 className="text-gray-500 text-sm">
+              <h4 className="text-gray-600 text-sm">
                 Here are the projects I've worked on over the years that I am
                 most proud of.
               </h4>
@@ -76,7 +76,7 @@ export default function HomePage({ projects }: { projects: ProjectProps[] }) {
               </p>
             </object>
           </div>
-          <div className="mx-5 p-4 rounded-md bg-slate-800" id="contact">
+          <div className="mx-5 p-4 rounded-md bg-slate-800 border-black border-4" id="contact">
             <h1 className="text-3xl font-bold text-white">Contact Me</h1>
             <h3 className="text-gray-500 text-sm">
               Feel free to reach out with any one of these following links:
