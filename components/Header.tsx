@@ -9,10 +9,10 @@ import Link from "next/link";
 const links: { href: string; label: string }[] = [
   { href: "/", label: "Home" },
   // { href: "/blog", label: "Blog" },
-  { href: "/projects", label: "Projects" },
+  { href: "/#projects", label: "Projects" },
   // { href: "/about", label: "About" },
-  { href: "/resume.pdf", label: "Resume" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#resume", label: "Resume" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Header() {
