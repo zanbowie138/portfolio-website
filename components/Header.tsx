@@ -67,13 +67,11 @@ export default function Header() {
             {nav && (
               <div>
                 <motion.div
-                  initial={{ x: 200 }}
+                  initial={{ x: 300 }}
                   animate={{ x: 0 }}
-                  exit={{ x: 200 }}
+                  exit={{ x: 300 }}
                   transition={{
                     type: "easeInOut",
-                    stiffness: 300,
-                    damping: 50,
                     duration: 0.2,
                   }}
                   className="fixed bg-slate-800 text-white top-0 right-0 h-full py-3 px-5 rounded-l-lg z-[999]"

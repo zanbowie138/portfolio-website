@@ -31,13 +31,10 @@ export default function HomePage({ projects }: { projects: ProjectProps[] }) {
               </p>
             </div>
             <div className="w-full my-3 md:my-0">
-              <Image
+              <img
                 src="/profile.jpg"
                 alt="logo"
-                width="200"
-                height="200"
-                className="rounded-2xl h-min bg-black p-1 m-auto"
-                priority={true}
+                className="rounded-2xl h-min bg-black p-1 m-auto md:w-[200px] md:h-[200px] w-[300px]"
               />
             </div>
           </div>
