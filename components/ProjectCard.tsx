@@ -10,7 +10,7 @@ export interface ProjectCardProps {
   title: string;
   date_range: string;
   description: string;
-  image_link: string;
+  image_links: string[];
   button_link?: string;
   tags?: string[];
 }
@@ -43,15 +43,13 @@ export default function ProjectCard({
           <div className="flex items-center gap-2 w-full h-full md:flex-col">
               <motion.img
                 className="object-cover w-[120px] h-[90px] md:w-full md:h-[150px] bg-black border-2 border-black"
-                // layoutId={`${project.id}-title`}
-                src={project.image_link}
+                src={project.image_links[0]}
                 alt="logo"
               />
             <div className="text-left flex flex-col grow">
               <div className="grow">
                 <motion.h3
                   className="font-semibold text-lg my-0 py-0"
-                  // layoutId={`${project.id}-title`}
                 >
                   {project.title}
                 </motion.h3>
@@ -62,7 +60,6 @@ export default function ProjectCard({
                 {project.tags && project.tags.length > 0 && (
                   <motion.div
                     className="flex gap-1 mt-2 flex-wrap"
-                    // layoutId={`${project.id}-tags`}
                   >
                     {project.tags.map((tag, index) => (
                       <Tag key={index} text={tag} />

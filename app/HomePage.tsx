@@ -21,7 +21,7 @@ export default function HomePage({ projects }: { projects: ProjectProps[] }) {
               <p className="text-black text-lg">
                 I'm Alexander Bui, a developer and student currently studying
                 Computer Engineering at{" "}
-                <span className="font-semibold text-maroon-400">
+                <span className="font-bold text-maroon-400">
                   Texas A&M University
                 </span>
                 , interested in graphics programming and the intersections of
@@ -76,9 +76,9 @@ export default function HomePage({ projects }: { projects: ProjectProps[] }) {
               </p>
             </object>
           </div>
-          <div className="mx-5 p-4 rounded-md bg-slate-800 border-black border-4" id="contact">
+          <div className="mx-5 p-4 rounded-xl bg-slate-800" id="contact">
             <h1 className="text-3xl font-bold text-white">Contact Me</h1>
-            <h3 className="text-gray-500 text-sm">
+            <h3 className="text-gray-400 text-sm">
               Feel free to reach out with any one of these following links:
             </h3>
             <ul className="text-white">
