@@ -88,7 +88,7 @@ export default function HomePage({ projects }: { projects: ProjectProps[] }) {
               </li>
               <li>
                 <SocialLink
-                  link={"https://www.linkedin.com/in/alexander-bui-1b8b5b1b8/"}
+                  link={"https://www.linkedin.com/in/alexanderbui28/"}
                   text={"LinkedIn"}
                   icon={<FaLinkedin />}
                 />
