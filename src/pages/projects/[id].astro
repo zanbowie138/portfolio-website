@@ -1,7 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import ProjectPage from "@/components/ProjectPage.astro";
+import BackArrow from "@/components/BackArrow";
+import { ProjectCarousel } from "@/pages/projects/components/ProjectCarousel";
+import Tag from "@/components/Tag";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -14,10 +16,45 @@ export async function getStaticPaths() {
 // 2. For your template, you can get the entry directly from the prop
 const { post } = Astro.props;
 const { Content } = await render(post);
+const project = post.data;
 ---
 
 <Layout>
-  <ProjectPage project={post.data} client:load>
-    <div></div>
-  </ProjectPage>
+  <div class="p-5">
+    <BackArrow />
+    <ProjectCarousel
+      images={project.image_links}
+      captions={project.image_captions}
+      client:load
+    />
+    <div class="flex flex-col my-3">
+      <h3
+        class="font-semibold text-4xl grow"
+        transition:name={`${project.id}-title`}
+      >
+        {project.title}
+      </h3>
+      <h2 class="text-gray-700 text-lg">{project.date_range}</h2>
+    </div>
+    <div class="flex flex-col sm:flex-row-reverse gap-3 my-2">
+      {
+        project.tags && project.tags.length > 0 && (
+          <div class="rounded-md p-3 font-semibold w-fit border-2 border-black">
+            <span class="font-semibold text-xl">Technologies</span>
+            <div class="flex gap-1 mt-2 flex-wrap">
+              {project.tags.map((tag) => (
+                <Tag text={tag} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+      <div class="grow">
+        <span class="font-semibold text-xl">Description</span>
+        <div class="text-black text-lg">
+          {project.description}
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>
