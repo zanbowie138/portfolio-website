@@ -22,6 +22,8 @@ export default function Header() {
       }
     };
 
+    console.log(nav);
+
     if (nav) {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("scroll", handleClickOutside);
@@ -30,6 +32,11 @@ export default function Header() {
       document.removeEventListener("scroll", handleClickOutside);
     }
   }, [nav]);
+
+  useEffect(() => {
+    console.log(nav);
+  }, [nav]);
+
   return (
     <div className="flex bg-slate-800 p-3 rounded-t-md">
       <nav className="flex items-center justify-between w-full px-2">
@@ -55,7 +62,7 @@ export default function Header() {
           ))}
         </ul>
         <div className="md:hidden">
-          <button className={"text-white text-xl"} onClick={() => setNav(!nav)}>
+          <button className={"text-white text-xl z-50"} onClick={() => setNav(true)}>
             <IoMenu size={30} />
           </button>
           <AnimatePresence>

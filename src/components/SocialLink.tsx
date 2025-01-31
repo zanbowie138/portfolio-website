@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 export default function SocialLink({
   link,
   text,
@@ -5,11 +7,11 @@ export default function SocialLink({
 }: {
   link: string;
   text: string;
-  icon: any;
+  icon: JSX.Element;
 }) {
   return (
     <div className="flex items-center gap-2 text-xl">
-      {icon} 
+      {icon}
       <a href={link} className="text-blue-400 underline">
         {text}
       </a>

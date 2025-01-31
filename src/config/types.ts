@@ -1,4 +1,4 @@
-import { z } from 'astro:content';
+import { z } from "astro:content";
 // export interface ProjectProps {
 //     id: string;
 //     title: string;
@@ -25,15 +25,26 @@ import { z } from 'astro:content';
 // }
 
 export const ProjectSchema = z.object({
-        id: z.string(),
-        title: z.string(),
-        date_range: z.string(),
-        description: z.string(),
-        image_links: z.array(z.string()),
-        image_captions: z.array(z.string()).optional(),
-        button_link: z.string().optional(),
-        priority: z.number().optional(),
-        tags: z.array(z.string()).optional(),
-    })
+  id: z.string(),
+  title: z.string(),
+  date_range: z.string(),
+  description: z.string(),
+  image_links: z.array(z.string()),
+  image_captions: z.array(z.string()).optional(),
+  button_link: z.string().optional(),
+  priority: z.number().optional(),
+  tags: z.array(z.string()).optional(),
+});
+
+export const BlogSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  date_range: z.string(),
+  description: z.string(),
+  image_link: z.string(),
+  button_link: z.string().optional(),
+  priority: z.number().optional(),
+  tags: z.array(z.string()).optional(),
+});
 
 export type ProjectProps = z.infer<typeof ProjectSchema>;

@@ -2,11 +2,10 @@
 // import "@/styles/global.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ClientRouter } from "astro:transitions";
 const { title } = Astro.props;
 ---
 
-<html lang="en" class="scroll-smooth" transition:animate="fade">
+<html lang="en">
   <head>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +19,7 @@ const { title } = Astro.props;
   </head>
   <body class="bg-gray-950 justify-center flex min-h-screen">
     <div class="w-full lg:h-fit lg:w-[1000px] lg:my-4 flex flex-col">
-      <Header />
+      <Header client:load />
       <div class="bg-white lg:rounded-b-md flex flex-col grow">
         <div class="grow"><slot /></div>
         <Footer />

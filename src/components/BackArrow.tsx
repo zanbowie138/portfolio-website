@@ -10,9 +10,19 @@ export default function BackArrow() {
       onMouseEnter={() => setArrowHover(true)}
       onMouseLeave={() => setArrowHover(false)}
     >
-      <a
-        href="/#projects"
+      <button
+        onClick={() => {
+          const referrer = document.referrer;
+          const isInSite = referrer && referrer.includes(window.location.origin);
+          if (isInSite) {
+            window.history.back();
+          } else {
+            window.location.href = '/projects';
+          }
+        }}
         className="flex items-center font-semibold gap-[4px] bg-slate-300 px-3 py-1 rounded-md"
+        onMouseEnter={() => setArrowHover(true)}
+        onMouseLeave={() => setArrowHover(false)}
       >
         <motion.div
           animate={{ x: arrowHover ? -3 : 0 }}
@@ -21,7 +31,7 @@ export default function BackArrow() {
           <FaArrowLeft size={15} />
         </motion.div>
         Back to projects
-      </a>
+      </button>
     </div>
   );
 }
