@@ -1,0 +1,31 @@
+---
+// import "@/styles/global.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ClientRouter } from "astro:transitions";
+const { title } = Astro.props;
+---
+
+<html lang="en" class="scroll-smooth" transition:animate="fade">
+  <head>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="generator" content={Astro.generator} />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <ClientRouter />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-950 justify-center flex min-h-screen">
+    <div class="w-full lg:h-fit lg:w-[1000px] lg:my-4 flex flex-col">
+      <Header />
+      <div class="bg-white lg:rounded-b-md flex flex-col grow">
+        <div class="grow"><slot /></div>
+        <Footer />
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+---
+// filepath: /c:/Users/zanbo/Documents/Projects/portfolio-website/src/components/project/ProjectCard.astro
+import { AnimatePresence, motion } from "framer-motion";
+import Tag from "@/components/Tag";
+import type { ProjectProps } from "@/config/types";
+
+interface Props {
+  project: ProjectProps;
+}
+const { project } = Astro.props;
+---
+
+<div
+  class="rounded-md py-2 px-3 gap-2 border border-gray-300 hover:shadow-md h-full bg-white hover:scale-[1.05] transition-transform duration-300"
+>
+  <a href={`/projects/${project.id}`}>
+    <div class="flex items-center gap-2 w-full h-full md:flex-col">
+      <img
+        class="object-cover w-[120px] h-[90px] md:w-full md:h-[150px] bg-black border-2 border-black"
+        src={project.image_links[0]}
+        alt="logo"
+        transition:name={`${project.id}-img`}
+      />
+      <div class="text-left flex flex-col grow">
+        <div class="grow">
+          <h3
+            class="font-semibold text-lg my-0 py-0"
+            transition:name={`${project.id}-title`}
+          >
+            {project.title}
+          </h3>
+          <h2 class="text-gray-700 text-xs">{project.date_range}</h2>
+          <p class="text-sm" transition:name={`${project.id}-desc`}>
+            {project.description}
+          </p>
+        </div>
+        <div>
+          {
+            project.tags && project.tags.length > 0 && (
+              <div class="flex gap-1 mt-2 flex-wrap">
+                {project.tags.map((tag) => (
+                  <Tag text={tag} />
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

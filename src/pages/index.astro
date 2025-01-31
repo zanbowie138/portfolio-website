@@ -1,0 +1,52 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProjectCard from "@/components/project/ProjectCard.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects").then((projects) =>
+  projects.map((project) => project.data)
+);
+---
+
+<Layout title="Home">
+  <div>
+    <div
+      class="md:flex md:flex-row text-black place-content-center m-5 gap-5 relative"
+    >
+      <div>
+        <h1 class="text-4xl font-bold w-fit">Howdy!</h1>
+        <p class="text-black text-lg">
+          I'm Alexander Bui, a developer and student currently studying Computer
+          Engineering at{" "}
+          <span class="font-bold text-maroon-400"> Texas A&M University </span>
+          , interested in graphics programming and the intersections of high-performance
+          computing and hardware. I'm currently working on a few projects, including
+          an OpenGL rendering engine and a crowdsourced event platform for the Texas
+          A&M campus.
+        </p>
+      </div>
+      <div class="w-full my-3 md:my-0">
+        <img
+          src="/profile.jpg"
+          alt="logo"
+          class="rounded-2xl h-min bg-black p-1 m-auto md:w-[200px] md:h-[200px] w-[300px]"
+        />
+      </div>
+    </div>
+    <div class="md:w-full flex my-3 justify-center">
+      <div class="grow-0 py-3 px-5" id="projects">
+        <h3 class="text-3xl font-bold">Featured Projects</h3>
+        <h4 class="text-gray-600 text-sm">
+          Here are the projects I've worked on over the years that I am most
+          proud of.
+        </h4>
+        <div
+          class="md:grid md:grid-cols-3 md:items-start flex flex-col gap-2 w-full my-3"
+        >
+          {projects.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+~
