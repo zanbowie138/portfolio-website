@@ -29,7 +29,7 @@ export default function LargeProjectCard({ project }: Props) {
       />
       <div className="flex flex-col grow">
         <div className="flex items-center gap-1">
-          <h3 className="text-3xl font-bold flex items-center">
+          <h3 className={`text-3xl font-bold flex items-center ${isHovered ? 'text-blue-800' : 'text-black'}`}>
             {project.title}
           </h3>
           <motion.div 

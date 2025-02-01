@@ -2,10 +2,10 @@
 import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import BackArrow from "@/components/BackArrow";
-import ProjectCarousel from "@/pages/projects/components/ProjectCarousel";
+import ProjectCarousel from "@/components/project/ProjectCarousel";
 import Tag from "@/components/SmallTag";
+import Prose from "@/components/Prose.astro";
 
-// 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
   return projects.map((post) => ({
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
     props: { post },
   }));
 }
-// 2. For your template, you can get the entry directly from the prop
+
 const { post } = Astro.props;
 const { Content } = await render(post);
 const project = post.data;
@@ -54,8 +54,10 @@ const project = post.data;
         <div class="text-black text-lg" transition:name={`${project.id}-description`}>
           {project.description}
         </div>
-        <Content />
       </div>
     </div>
+    <Prose>
+      <Content />
+    </Prose>
   </div>
 </Layout>
