@@ -28,21 +28,25 @@ export default function LargeProjectCard({ project }: Props) {
         alt="logo" 
       />
       <div className="flex flex-col grow">
-        <div className="flex items-center gap-1">
-          <h3 className={`text-3xl font-bold flex items-center ${isHovered ? 'text-blue-800' : 'text-black'}`}>
-            {project.title}
-          </h3>
-          <motion.div 
-            animate={{ y: isHovered ? -2 : 3, x: isHovered ? -5 : -10 }} 
-            initial={{ y: 3, x: -10 }}
-            transition={{ type: "easeInOut", duration: 0.2 }} 
-            className=""
-          >
-            <MdArrowOutward size={20} className="ml-2 text-black " />
-          </motion.div>
+        <div className="flex items-center justify-between">
+          <div className="flex justify-between gap-1">
+            <div className="flex items-center gap-1">
+              <h3 className={`text-3xl font-bold flex items-center ${isHovered ? 'text-blue-800' : 'text-black'}`}>
+                {project.title}
+              </h3>
+              <motion.div
+                animate={{ y: isHovered ? -2 : 3, x: isHovered ? -5 : -10 }}
+                initial={{ y: 3, x: -10 }}
+                transition={{ type: "easeInOut", duration: 0.2 }}
+                className=""
+              >
+                <MdArrowOutward size={20} className="ml-2 text-black " />
+              </motion.div>
+            </div>
+          </div>
+          <h2 className="text-md text-gray-700">{project.date_range}</h2>
         </div>
-        <h2 className="text-md text-gray-700">{project.date_range}</h2>
-        <p className="">{project.description}</p>
+        <p className="text-md" dangerouslySetInnerHTML={{ __html: project.description }}></p>
         {project.tags && project.tags.length > 0 && (
           <div className="flex gap-2 mt-4 flex-wrap">
             {project.tags.map((tag) => <Tag key={tag} text={tag} />)}

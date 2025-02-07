@@ -22,17 +22,16 @@ export default function ProjectCarousel({
   return (
     <>
       <div className="relative w-full h-96 overflow-hidden bg-black rounded-md">
-        
         <AnimatePresence initial={false}>
           <motion.div
             key={current}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0, x: -200 }}
+            transition={{ duration: 0.3 }}
             className="absolute top-0 left-0 w-full h-full flex justify-center items-center p-3"
           >
-            <img src={images[current]} alt="slide" className="h-full object-contain" />
+            <motion.img src={images[current]} alt="slide" className="h-full w-full object-contain" />
           </motion.div>
         </AnimatePresence>
         <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black via-transparent to-transparent" />

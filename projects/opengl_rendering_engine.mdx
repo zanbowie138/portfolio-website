@@ -1,11 +1,32 @@
 ---
 id: "opengl-rendering-engine"
 title: "OpenGL Rendering Engine"
-date_range: "2022 - Present"
+date_range: "2023 - Present"
 description: "A rendering engine built from scratch with OpenGL and C++, featuring custom shaders and bounding volume hierarchy implementations."
-image_links: ["/phys_eng.png"]
+image_links: ["/projects/opengl-rendering-engine/phys_eng.png"]
 priority: 2
 tags: ["C++", "OpenGL", "GLSL"]
 ---
 
 ### [Github Repo](https://github.com/zanbowie138/PhysicsSimulator)
+
+## Overview
+This is a rendering engine built from scratch with OpenGL and C++ that I've been working on intermittently for a couple years. 
+
+## Features
+- **Rendering Engine**
+  - The rendering engine is built using OpenGL and implements the graphics pipeline. 
+- **ECS Architecture**
+  - The engine uses an Entity Component System architecture to manage objects and components.
+- **Bounding Volume Hierarchy**
+  - The engine uses two different bounding volume hierarchies for collision detection. The first is a dynamic bounding volume hierarchy that is used for broad-phase collision detection, and the second is a static bounding volume hierarchy that is used for narrow-phase collision detection.
+- **GUI**
+  - The engine uses Dear ImGui for the GUI. Currently, it shows statistics such as FPS, and allows for toggling debug features like showing BVH nodes or regenerating the BVH.
+- **Logging System**
+  - I created a custom logging system that allows for easy logging of messages both to the console and to a file. It functions using a macro that allows for specifying the log level and the message, and the macro will automatically add the current timestamp and filename to the message.
+
+## What I'm proud of
+I first started this project in 2022, with no experience with any systems programming languages or OpenGL. Over the years, I've learned a lot of new things and improved the engine in many ways, and it's in some ways a reflection of how my programming skills and interests have evolved over time. 
+
+## Future Plans
+I'd like to continue working on this project, and I hope to eventually have a fully functional physics engine that can be used for rendering simulations.

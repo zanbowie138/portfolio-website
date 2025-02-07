@@ -3,8 +3,8 @@ id: "aggie-events"
 title: "Aggie Events"
 date_range: "2024 - Present"
 description: "A crowdsourced full-stack event platform for the Texas A&M campus, featuring event creation, advanced searching, and user authentication."
-image_links: ["/agev.png"]
-image_captions: ["Home Page"]
+image_links: ["/projects/aggie-events/landing.png", "/projects/aggie-events/search.png"]
+image_captions: ["Home Page", "Search Page"]
 button_link: "https://aggieevents.tech"
 tags:
   [
@@ -16,8 +16,69 @@ tags:
     "Express",
     "PassportJS",
   ]
+priority: 3
 ---
 
-### [Github Repo](https://github.com/Aggie-Events/aggie-events)
-
+## Links
+### [Github Repo](https://github.com/Aggie-Events/aggie-events) 
 ### [(WIP) Proof of Concept](https://aggieevents.tech)
+
+## Inspiration
+When I started as a freshman at Texas A&M, I was overwhelmed by the fragmented way campus events and clubs were promoted. I found myself juggling photos of posters, sifting through countless email blasts, and attending multiple open houses—only to still miss out on activities that truly interested me. This experience inspired me to create a streamlined platform where students can easily discover, share, and engage with the events and clubs on campus, ensuring that no opportunity slips by unnoticed.
+
+## My Role
+I am one of the project leads for Aggie Events, so I'm responsible for the overall direction of the project as well as managing the team. We host weekly meetings, where the project managers teach various full-stack concepts and assign tasks. We also heavily use Git to manage and track the contributions to the codebase.
+
+On the technical side, I'm the main developer for the project. During Fall 2024, I set up the initial project structure and stack architecture as well as the VPS and CI/CD pipeline. This semester, Spring 2025, I'll likely be working further on the backend, or where I'm needed most.
+
+## Stack Explanation
+### Frontend
+The frontend of the application is built using **Next.js**, a powerful **React** framework that enables server-side rendering and static site generation. It leverages **TailwindCSS** for styling, which allows for rapid UI development through utility-first CSS classes, promoting a clean and maintainable codebase.
+
+### Backend
+We use **PostgreSQL** as our database to store all the event and user data, a powerful and reliable relational database that would easily scale to the needs of the application. To actually connect the database to the frontend, we use **ExpressJS** to handle routing, middleware, and server-side logic for the API. 
+
+For actually accessing the database, I didn't want to use an ORM like Prisma, which would completely abstract away the underlying SQL and could cause performance issues (though probably not at this scale). However, I also didn't want to just use raw SQL queries because it would be dangerous and difficult to debug. Striking a decent middle ground between the two, I chose **Kysely**, a query builder for TypeScript that allows for type-safe queries to the database. I ended up being pretty happy with this choice because Kysely allows you to have TypeScript intellisense and good error messages while also transfering useful SQL skills. 
+
+For authentication, we use **PassportJS**, a popular middleware for handling authentication in Node.js. This is a pretty standard way to handle authentication in Node.js, so I didn't have to do much beyond implementing boilerplate code.
+
+### Deployment
+For deployment, there were a lot of options available to me. The most obvious choice would have been to use a cloud provider like AWS or GCP. However, there are a lot of hidden costs and dangers with using a cloud provider as well as a loss of a good learning experience. Thats why I decided to go for a more manual approach with a VPS. There's a full blog post on how we set up the VPS [here](https://blog.aggieevents.tech/posts/first_blog_post/). 
+
+After doing some research, I decided to host all the application code and dependencies in Docker containers. I chose to use **Docker** because it can deploy in a consistent environment while also allowing for easy scaling. I first created a Dockerfile for both the frontend and backend and pushed them to Docker Hub. Then, I created a Docker Compose file to store the configuration for deploying the custom Docker images and their dependencies.
+
+My current Docker container dependencies for deployment are:
+- **Traefik** 
+  - This is a reverse proxy that allows us to easily manage SSL certificates and network routing for our application. I chose this for its ease of use and easy integration with Docker.
+- **PostgreSQL**
+  - The PostgreSQL database, which I mentioned earlier, is actually hosted on a Docker container which makes it easy to deploy both locally for testing and on the VPS for production.
+- **prodrigestivill/postgres-backup-local**
+  - This is a Docker image that allows us to easily backup our PostgreSQL database to a folder on the VPS. This functions as a failsafe in case the database is ever corrupted or lost.
+
+### CI/CD Pipeline
+However, I still needed a way to push the code to the VPS. This ended up not being a simple task, as I had to go through a fairly extensive process because of the way Docker and the VPS work. I ended up creating a custom pipeline on **Github Actions** that builds the Docker images and pushes them to the VPS automatically when code is pushed to the main branch. 
+
+A quick overview of the process is:
+1. Push code to the main branch
+2. Github Actions triggers the workflow
+3. The workflow builds the frontend and backend Docker images and pushes them to Docker Hub
+4. Create environment variable files for the Docker compose file, frontend, and backend using the Github Actions secrets
+5. Use scp to copy the environment variable files, Docker compose files, and the run script to the VPS
+6. Run the bash script to close the currently running containers and redeploy using the Docker Compose file
+
+## Challenges
+Starting out, I didn't have a lot of experience with full-stack development beyond a couple static sites. I had to learn a lot of new technologies and concepts all at once, while also integrating them in a production ready environment. It was a lot of work and required many hours of very painful debugging, but I'm on the other side now and I'm glad I went through the trouble of really learning it from the ground up.
+
+## Future Plans
+Now that the structure is set up, I'm looking forward to implementing more features and cleaning up the codebase. There are way too many features I want to implement, but here are some of the big ones:
+
+- **Mobile App**
+  - Currently, we only have a web application. I think it's pretty important to have a mobile app, as it would increase the amount of users that would use the application.
+- **Polished Search Page**
+  - The search page is pretty barebones right now, and I think it would be a great improvement to have a more polished search page with more filters and sorting options.
+- **Improved User Experience**
+  - I want to make it easy to create and find events and clubs, and I think the current UX is pretty clunky. Also, it would be great to add features like notifications and a calendar.
+
+
+
+

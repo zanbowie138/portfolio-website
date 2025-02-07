@@ -5,6 +5,7 @@ import BackArrow from "@/components/BackArrow";
 import ProjectCarousel from "@/components/project/ProjectCarousel";
 import Tag from "@/components/SmallTag";
 import Prose from "@/components/Prose.astro";
+import StringRender from "@/components/StringRender";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -27,37 +28,37 @@ const project = post.data;
       captions={project.image_captions}
       client:load
     />
-    <div class="flex flex-col my-3">
-      <h3
-        class="font-semibold text-4xl grow"
-        transition:name={`${project.id}-title`}
-      >
-        {project.title}
-      </h3>
-      <h2 class="text-gray-700 text-lg">{project.date_range}</h2>
-    </div>
-    <div class="flex flex-col sm:flex-row-reverse gap-3 my-2">
-      {
-        project.tags && project.tags.length > 0 && (
-          <div class="rounded-md p-3 font-semibold w-fit bg-gray-100">
-            <span class="font-semibold text-xl">Technologies</span>
-            <div class="flex gap-1 mt-2 flex-wrap">
-              {project.tags.map((tag) => (
-                <Tag text={tag} />
-              ))}
+    <div class="md:px-[10px]">
+      <div class="flex flex-col my-3">
+        <h3
+          class="font-semibold text-4xl grow"
+          transition:name={`${project.id}-title`}
+        >
+          {project.title}
+        </h3>
+        <h2 class="text-gray-700 text-lg">{project.date_range}</h2>
+      </div>
+      <div class="flex flex-col sm:flex-row-reverse gap-3 my-2">
+        {
+          project.tags && project.tags.length > 0 && (
+            <div class="rounded-md p-3 font-semibold w-fit bg-gray-100">
+              <span class="font-semibold text-xl">Technologies</span>
+              <div class="flex gap-1 mt-2 flex-wrap">
+                {project.tags.map((tag) => (
+                  <Tag text={tag} />
+                ))}
+              </div>
             </div>
-          </div>
-        )
-      }
-      <div class="grow">
-        <span class="font-semibold text-xl">Description</span>
-        <div class="text-black text-lg" transition:name={`${project.id}-description`}>
-          {project.description}
+          )
+        }
+        <div class="grow">
+          <span class="font-semibold text-xl">Description</span>
+          <StringRender text={project.description} className="text-black text-lg" />
         </div>
       </div>
+      <Prose>
+        <Content />
+      </Prose>
+        </div>
     </div>
-    <Prose>
-      <Content />
-    </Prose>
-  </div>
 </Layout>
