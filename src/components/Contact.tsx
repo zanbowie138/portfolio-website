@@ -18,20 +18,20 @@ const ContactLinks: ContactLink[] = [
     link: "mailto:alexanderbui180@gmail.com",
     label: "Email Me",
     text: "alexanderbui180@gmail.com",
-    icon: <HiOutlineMail size={20}/>,
+    icon: <HiOutlineMail size={20} />,
   },
   {
     link: "https://github.com/zanbowie138",
     label: "GitHub",
     text: "View my GitHub",
-    icon: <FaGithub size={20}/>,
+    icon: <FaGithub size={20} />,
   },
   {
     link: "https://www.linkedin.com/in/alexanderbui28",
     label: "LinkedIn",
     text: "Connect on LinkedIn",
-    icon: <FaLinkedin size={20}/>,
-  }
+    icon: <FaLinkedin size={20} />,
+  },
 ];
 
 export default function Contact() {
@@ -44,31 +44,24 @@ export default function Contact() {
   );
 }
 
-
-
 function ContactButton({ link, label, text, icon }: ContactLink) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.a 
-      href={link} 
-      target="_blank" 
-      rel="noopener noreferrer" 
+    <motion.a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
       className="relative flex items-center justify-center group border-[1px] border-gray-200 rounded-md p-2 shadow-md"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       animate={{ scale: isHovered ? 1.2 : 1 }} // Grow entire button on hover
       transition={{ type: "easeInOut", duration: 0.2 }}
     >
-      <div className="flex items-center">
-        {icon}
-      </div>
-      <motion.div 
-        className="absolute bottom-full mb-1 bg-gray-700 text-white text-xs rounded p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap"
-      >
+      <div className="flex items-center">{icon}</div>
+      <motion.div className="absolute bottom-full mb-1 bg-gray-700 text-neutral-200 text-xs rounded p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
         {label}
       </motion.div>
     </motion.a>
   );
 }
-

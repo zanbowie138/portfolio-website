@@ -48,7 +48,7 @@ export default function SideNavigator() {
   return (
     <div
       ref={menuRef}
-      className="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white"
+      className="fixed top-0 left-0 h-full w-64 bg-gray-800 text-neutral-200"
     >
       <button onClick={() => setNav(!nav)} className="p-4">
         {nav ? <FaTimes /> : <FaBars />}

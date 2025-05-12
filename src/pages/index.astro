@@ -15,19 +15,39 @@ const featuredProjects = projects
   .sort((a, b) => b.priority - a.priority)
   .slice(0, 3);
 
-const skills = ["C++", "Python", "TypeScript", "JavaScript", "React", "Node.js", "OpenGL", "SQL", "Postgres", "Docker", "Java", "Tailwind", "Next.js", "Astro", "Linux", "Git", "GitHub", "ExpressJS", "ThreeJS"];
+const skills = [
+  "C++",
+  "Python",
+  "TypeScript",
+  "JavaScript",
+  "React",
+  "Node.js",
+  "OpenGL",
+  "SQL",
+  "Postgres",
+  "Docker",
+  "Java",
+  "Tailwind",
+  "Next.js",
+  "Astro",
+  "Linux",
+  "Git",
+  "GitHub",
+  "ExpressJS",
+  "ThreeJS",
+];
 ---
 
 <Layout title="Home">
   <div>
-    <div
-      class="rounded-md border-[1px] border-gray-200 flex flex-row p-4 m-3 items-center justify-between"
+    <!-- <div
+      class="rounded-md border-[1px] border-white-200 flex flex-row p-4 m-3 items-center justify-between"
     >
       <div class="flex items-center">
         <img
           src="/profile.jpg"
           alt="Alexander Bui"
-          class="rounded-full h-16 w-16 bg-black p-1"
+          class="rounded-full h-16 w-16 p-1"
         />
         <div class="flex flex-col ml-4">
           <div class="font-bold text-lg">Alexander Bui</div>
@@ -35,19 +55,17 @@ const skills = ["C++", "Python", "TypeScript", "JavaScript", "React", "Node.js",
         </div>
       </div>
       <Contact client:load />
-    </div>
-    <div
-      class="md:flex md:flex-row text-black place-content-center m-5 gap-5 relative"
-    >
+    </div> -->
+    <div class="md:flex md:flex-row place-content-center m-5 gap-5 relative">
       <div class="grow">
         <h1 class="text-4xl font-bold w-fit">Howdy!</h1>
-        <p class="text-black text-lg">
+        <p class="text-lg">
           I'm Alex, a developer and student currently studying Computer
           Engineering at{" "}
-          <span class="font-bold text-maroon-400">Texas A&M University</span>.
-          Currently, I'm interested in graphics programming and the intersections
-          of high-performance computing and hardware.
-          I'm currently working on a few projects, including an OpenGL rendering
+          <span class="font-bold text-lightmaroon">Texas A&M University</span>.
+          Currently, I'm interested in graphics programming and the
+          intersections of high-performance computing and hardware. I'm
+          currently working on a few projects, including an OpenGL rendering
           engine and a crowdsourced event platform for the Texas A&M campus.
         </p>
       </div>
@@ -68,7 +86,7 @@ const skills = ["C++", "Python", "TypeScript", "JavaScript", "React", "Node.js",
     <div class="md:w-full flex my-3 justify-center">
       <div class="grow-0 py-3 px-5" id="projects">
         <h3 class="text-3xl font-bold">Featured Projects</h3>
-        <h4 class="text-gray-600 text-sm">
+        <h4 class="text-neutral-300 text-sm">
           View a longer list of my projects <a
             href="/projects"
             class="text-blue-400 hover:text-blue-500 hover:underline">here</a

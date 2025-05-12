@@ -28,7 +28,7 @@ const project = post.data;
       captions={project.image_captions}
       client:load
     />
-    <div class="md:px-[10px] max-w-[700px] mx-auto">
+    <div class="md:px-[10px] max-w-[850px] mx-auto">
       <div class="flex flex-col my-3">
         <h3
           class="font-semibold text-4xl grow"
@@ -36,13 +36,17 @@ const project = post.data;
         >
           {project.title}
         </h3>
-        <h2 class="text-gray-700 text-lg">{project.date_range}</h2>
+        <h2 class="text-neutral-400 text-lg">{project.date_range}</h2>
       </div>
-      <div class="flex flex-col sm:flex-row-reverse gap-3 my-2">
+      <div
+        class="flex flex-col sm:flex-row-reverse gap-3 my-2 text-neutral-200"
+      >
         {
           project.tags && project.tags.length > 0 && (
-            <div class="rounded-md p-3 font-semibold w-fit bg-gray-100">
-              <span class="font-semibold text-xl">Technologies</span>
+            <div class="rounded-md p-3 font-semibold w-fit outline outline-1 outline-neutral-600">
+              <span class="font-semibold text-xl text-neutral-200">
+                Technologies
+              </span>
               <div class="flex gap-1 mt-2 flex-wrap">
                 {project.tags.map((tag) => (
                   <Tag text={tag} />
@@ -53,12 +57,15 @@ const project = post.data;
         }
         <div class="grow">
           <span class="font-semibold text-xl">Description</span>
-          <StringRender text={project.description} className="text-black text-lg" />
+          <StringRender
+            text={project.description}
+            className="text-neutral-200 text-lg"
+          />
         </div>
       </div>
       <Prose>
         <Content />
       </Prose>
-        </div>
     </div>
+  </div>
 </Layout>

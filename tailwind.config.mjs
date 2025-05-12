@@ -22,7 +22,7 @@ export default {
 				  950: "#220000",
 				},
 				lightmaroon: {
-				  DEFAULT: "#662c2c",
+				  DEFAULT: "#8f4949",
 				},
 			  },
 		  },

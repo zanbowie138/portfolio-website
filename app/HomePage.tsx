@@ -74,11 +74,11 @@ export default function HomePage({ projects }: { projects: ProjectProps[] }) {
             </object>
           </div>
           <div className="mx-5 p-4 rounded-xl bg-slate-800" id="contact">
-            <h1 className="text-3xl font-bold text-white">Contact Me</h1>
+            <h1 className="text-3xl font-bold text-neutral-200">Contact Me</h1>
             <h3 className="text-gray-400 text-sm">
               Feel free to reach out with any one of these following links:
             </h3>
-            <ul className="text-white">
+            <ul className="text-neutral-200">
               <li>
                 <SocialLink
                   link={"mailto:alexanderbui180@gmail.com"}

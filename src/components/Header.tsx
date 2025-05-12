@@ -1,6 +1,7 @@
 import { IoMenu } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+
 import { AnimatePresence } from "framer-motion";
 const links: { href: string; label: string }[] = [
   { href: "/", label: "Home" },
@@ -38,31 +39,43 @@ export default function Header() {
   }, [nav]);
 
   return (
-    <div className="flex bg-slate-800 p-3 rounded-t-md">
+    <div className="flex p-3">
       <nav className="flex items-center justify-between w-full px-2">
-        <a href="/">
-          <img
-            src="/profile.jpg"
-            alt="logo"
-            width="40"
-            height="40"
-            className="rounded-full mr-5 bg-slate-600 p-0.5 hover:bg-slate-700"
-          />
-        </a>
+        <div>
+          <div className="flex items-center">
+            <a href="/">
+              <img
+                src="/profile.jpg"
+                alt="Alexander Bui"
+                className="rounded-full h-14 w-14 p-1 hover:outline outline-neutral-800"
+              />
+            </a>
+            <div className="flex flex-col ml-4">
+              <div className="font-bold text-md">Alexander Bui</div>
+              <div className="text-gray-500 text-sm">
+                Computer Engineering Freshman
+              </div>
+            </div>
+          </div>
+        </div>
+
         <ul className="hidden md:flex">
           {links.map((link, index) => (
             <li className="flex-auto" key={index}>
-                <a
+              <a
                 href={link.href}
-                className="text-white text-xl mr-7 hover:underline underline-offset-4 font-semibold"
-                >
+                className="text-neutral-200 text-xl mr-7 hover:text-neutral-400 font-semibold"
+              >
                 {link.label}
-                </a>
+              </a>
             </li>
           ))}
         </ul>
         <div className="md:hidden">
-          <button className={"text-white text-xl z-50"} onClick={() => setNav(true)}>
+          <button
+            className={"text-neutral-200 text-xl z-50"}
+            onClick={() => setNav(true)}
+          >
             <IoMenu size={30} />
           </button>
           <AnimatePresence>
@@ -76,7 +89,7 @@ export default function Header() {
                     type: "easeInOut",
                     duration: 0.2,
                   }}
-                  className="fixed bg-slate-800 text-white top-0 right-0 h-full py-3 px-5 rounded-l-lg z-[999]"
+                  className="fixed bg-neutral-800 text-neutral-200 top-0 right-0 h-full py-3 px-5 rounded-l-lg z-[999]"
                   ref={menuRef}
                 >
                   <ul className="flex flex-col">
@@ -93,7 +106,7 @@ export default function Header() {
                         >
                           {link.label}
                         </a>
-                      </li> 
+                      </li>
                     ))}
                   </ul>
                 </motion.div>

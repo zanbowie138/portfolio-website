@@ -13,14 +13,15 @@ export default function BackArrow() {
       <button
         onClick={() => {
           const referrer = document.referrer;
-          const isInSite = referrer && referrer.includes(window.location.origin);
+          const isInSite =
+            referrer && referrer.includes(window.location.origin);
           if (isInSite) {
             window.history.back();
           } else {
-            window.location.href = '/projects';
+            window.location.href = "/projects";
           }
         }}
-        className="flex items-center font-semibold gap-[4px] bg-slate-300 px-3 py-1 rounded-md"
+        className="flex items-center font-semibold gap-[4px] bg-neutral-300 px-3 py-1 rounded-md text-black"
         onMouseEnter={() => setArrowHover(true)}
         onMouseLeave={() => setArrowHover(false)}
       >
