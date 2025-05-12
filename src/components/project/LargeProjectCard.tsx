@@ -29,7 +29,7 @@ export default function LargeProjectCard({ project }: Props) {
         <div className="flex flex-wrap items-center justify-between">
           <div className="flex items-center gap-1">
             <h3
-              className={`text-3xl font-bold flex items-center whitespace-nowrap ${isHovered ? "text-slate-500" : "text-neutral-200"}`}
+              className={`text-3xl font-bold flex items-center ${isHovered ? "text-slate-500" : "text-neutral-200"}`}
             >
               {project.title}
             </h3>

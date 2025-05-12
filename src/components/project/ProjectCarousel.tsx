@@ -142,7 +142,7 @@ export default function ProjectCarousel({
     <>
       <div
         ref={carouselRef}
-        className="relative w-full h-96 overflow-hidden bg-black rounded-md select-none" // Added select-none
+        className="relative w-full aspect-[16/9] max-h-[500px] overflow-hidden bg-black rounded-md select-none" // Changed h-96 to aspect-[16/9] and added max-h-[500px]
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
@@ -189,30 +189,34 @@ export default function ProjectCarousel({
         )}
 
         {/* Navigation Buttons */}
-        <motion.button
-          initial={{ transform: "translateY(-50%) scale(1)" }}
-          whileHover={{ scale: 1.15 }}
-          transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          onClick={handlePrev}
-          className="absolute left-2 top-1/2 md:left-4 bg-neutral-900/50 hover:bg-neutral-900/80 text-neutral-200 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-          aria-label="Previous image"
-        >
-          <IoIosArrowBack size={25} />
-        </motion.button>
+        {images.length > 1 && (
+          <>
+            <motion.button
+              initial={{ transform: "translateY(-50%) scale(1)" }}
+              whileHover={{ scale: 1.15 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              onClick={handlePrev}
+              className="absolute left-2 top-1/2 md:left-4 bg-neutral-900/50 hover:bg-neutral-900/80 text-neutral-200 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Previous image"
+            >
+              <IoIosArrowBack size={25} />
+            </motion.button>
 
-        <motion.button
-          initial={{ transform: "translateY(-50%) scale(1)" }}
-          whileHover={{ scale: 1.15 }}
-          transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          onClick={handleNext}
-          className="absolute right-2 top-1/2 md:right-4 bg-neutral-900/50 hover:bg-neutral-900/80 text-neutral-200 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-          aria-label="Next image"
-        >
-          <IoIosArrowForward size={25} />
-        </motion.button>
+            <motion.button
+              initial={{ transform: "translateY(-50%) scale(1)" }}
+              whileHover={{ scale: 1.15 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              onClick={handleNext}
+              className="absolute right-2 top-1/2 md:right-4 bg-neutral-900/50 hover:bg-neutral-900/80 text-neutral-200 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Next image"
+            >
+              <IoIosArrowForward size={25} />
+            </motion.button>
+          </>
+        )}
 
         {/* Play/Pause Button */}
-        {autoPlay && (
+        {autoPlay && images.length > 1 && (
           <motion.button
             initial={{ opacity: 0.7 }}
             whileHover={{ opacity: 1 }}
@@ -231,25 +235,27 @@ export default function ProjectCarousel({
       </div>
 
       {/* Dots Indicator */}
-      <div className="flex justify-center py-4">
-        <div className="flex gap-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() =>
-                setSlideshowState((prev) => ({ ...prev, current: index }))
-              }
-              className={`w-3 h-3 rounded-full transition-colors duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
-                current === index
-                  ? "bg-neutral-400 hover:bg-neutral-300"
-                  : "bg-neutral-700 hover:bg-neutral-600"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-              aria-current={current === index}
-            />
-          ))}
+      {images.length > 1 && (
+        <div className="flex justify-center py-4">
+          <div className="flex gap-2">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() =>
+                  setSlideshowState((prev) => ({ ...prev, current: index }))
+                }
+                className={`w-3 h-3 rounded-full transition-colors duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                  current === index
+                    ? "bg-neutral-400 hover:bg-neutral-300"
+                    : "bg-neutral-700 hover:bg-neutral-600"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-current={current === index}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Modal for Enlarged Image */}
       {modalState.isOpen && (

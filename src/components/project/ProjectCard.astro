@@ -21,10 +21,10 @@ const { project } = Astro.props;
       />
       <div class="text-left flex flex-col grow">
         <div
-          class="grow flex md:block md:flex-wrap items-center justify-between"
+          class="grow flex flex-wrap md:block md:flex-wrap items-center justify-between"
         >
           <h3
-            class="font-semibold text-lg"
+            class="font-semibold text-lg mr-2"
             transition:name={`${project.id}-title`}
           >
             {project.title}
