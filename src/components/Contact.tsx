@@ -1,39 +1,74 @@
 import { FaLinkedin } from "react-icons/fa";
-
 import { HiOutlineMail } from "react-icons/hi";
-import SocialLink from "./SocialLink";
 import { FaGithub } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { useState } from "react";
+
+// Add the ContactLink interface
+interface ContactLink {
+  link: string;
+  label: string;
+  text: string;
+  icon: React.ReactNode;
+}
+
+// Start of Selection
+const ContactLinks: ContactLink[] = [
+  {
+    link: "mailto:alexanderbui180@gmail.com",
+    label: "Email Me",
+    text: "alexanderbui180@gmail.com",
+    icon: <HiOutlineMail size={20}/>,
+  },
+  {
+    link: "https://github.com/zanbowie138",
+    label: "GitHub",
+    text: "View my GitHub",
+    icon: <FaGithub size={20}/>,
+  },
+  {
+    link: "https://www.linkedin.com/in/alexanderbui28",
+    label: "LinkedIn",
+    text: "Connect on LinkedIn",
+    icon: <FaLinkedin size={20}/>,
+  }
+];
 
 export default function Contact() {
   return (
-    <div className="mx-5 p-4 rounded-xl bg-slate-800" id="contact">
-      <h1 className="text-3xl font-bold text-white">Contact Me</h1>
-      <h3 className="text-gray-400 text-sm">
-        Feel free to reach out with any one of these following links:
-      </h3>
-      <ul className="text-white">
-        <li>
-          <SocialLink
-            link={"mailto:alexanderbui180@gmail.com"}
-            text={"alexanderbui180@gmail.com"}
-            icon={<HiOutlineMail />}
-          /> 
-        </li>
-        <li>
-          <SocialLink
-            link={"https://www.linkedin.com/in/alexanderbui28/"}
-            text={"LinkedIn"}
-            icon={<FaLinkedin />}
-          />
-        </li>
-        <li>
-          <SocialLink
-            link={"https://github.com/zanbowie138"}
-            text={"zanbowie138"}
-            icon={<FaGithub />}
-          />
-        </li> 
-      </ul>
+    <div className="mx-5 p-4 rounded-x flex flex-row gap-2">
+      {ContactLinks.map((link, index) => (
+        <ContactButton key={index} {...link} />
+      ))}
     </div>
   );
 }
+
+
+
+function ContactButton({ link, label, text, icon }: ContactLink) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.a 
+      href={link} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="relative flex items-center justify-center group border-[1px] border-gray-200 rounded-md p-2 shadow-md"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      animate={{ scale: isHovered ? 1.2 : 1 }} // Grow entire button on hover
+      transition={{ type: "easeInOut", duration: 0.2 }}
+    >
+      <div className="flex items-center">
+        {icon}
+      </div>
+      <motion.div 
+        className="absolute bottom-full mb-1 bg-gray-700 text-white text-xs rounded p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap"
+      >
+        {label}
+      </motion.div>
+    </motion.a>
+  );
+}
+

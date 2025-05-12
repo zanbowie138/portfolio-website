@@ -1,0 +1,30 @@
+---
+id: "java-raymarcher"
+title: "Java Raymarcher"
+date_range: "2023"
+description: "A raymarching rendering engine written in Java."
+image_links: ["/projects/java-raymarcher/sphere.png","/projects/java-raymarcher/sine.png", "/projects/java-raymarcher/demo1.gif"]
+image_captions: ["Rendering of sphere with texture and reflections","Rendering of sphere sdf with a sine displacement","Raymarcher real-time demo"]
+tags: ["Java"]
+---
+
+### [Link to Github](https://github.com/zanbowie138/Java-Raymarcher)
+
+## What is raymarching?
+In short, raymarching is a rendering technique where rays are iteratively marched through a scene, with step size being determined by functions called SDFs.
+
+SDF stands for signed distance function, and it is simply a function defined for a shape that takes in a point, and returns the distance between the shape and the point.
+
+For example, a sphere has an SDF of:
+```java
+float sphereSDF(vec3 point, Sphere s) {
+    return length(s.center() - point) - s.radius();
+}
+```
+
+## Why is this significant?
+Using a raymarching algorithm, any shape that has an SDF can be rendered. This means that scenes that would regularly  
+
+
+## Algorithm Breakdown
+

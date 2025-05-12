@@ -15,7 +15,7 @@ const { project } = Astro.props;
   <a href={`/projects/${project.id}`}>
     <div class="flex items-center gap-2 w-full h-full md:flex-col">
       <img
-        class="object-cover w-[120px] h-[90px] md:w-full md:h-[150px] bg-black border-2 border-black"
+        class="object-cover w-[120px] h-[90px] md:w-full md:h-[150px] rounded-sm"
         src={project.image_links[0]}
         alt="logo"
       />
