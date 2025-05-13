@@ -51,8 +51,7 @@ const { project } = Astro.props;
     <p
       class="text-sm md:hidden mt-2"
       transition:name={`${project.id}-description`}
-    >
-      {project.description}
-    </p>
+      set:html={project.description}
+    />
   </a>
 </div>
