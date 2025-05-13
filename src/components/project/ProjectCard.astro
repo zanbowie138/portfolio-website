@@ -1,5 +1,4 @@
 ---
-import { AnimatePresence, motion } from "framer-motion";
 import Tag from "@/components/SmallTag";
 import type { ProjectProps } from "@/config/types";
 
@@ -33,9 +32,8 @@ const { project } = Astro.props;
           <p
             class="text-sm hidden md:block"
             transition:name={`${project.id}-description`}
-          >
-            {project.description}
-          </p>
+            set:html={project.description}
+          />
         </div>
         <div>
           {

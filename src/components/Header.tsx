@@ -53,7 +53,7 @@ export default function Header() {
             <div className="flex flex-col ml-4">
               <div className="font-bold text-md">Alexander Bui</div>
               <div className="text-gray-500 text-sm">
-                Computer Engineering Freshman
+                Computer Engineering Sophmore
               </div>
             </div>
           </div>

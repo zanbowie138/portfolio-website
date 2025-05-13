@@ -4,10 +4,12 @@ import { getCollection } from "astro:content";
 import ProjectList from "@/components/project/ProjectList";
 
 const projects = await getCollection("projects").then((projects) =>
-  projects.map((project) => ({
-    ...project.data,
-    priority: project.data.priority || 0,
-  }))
+  projects
+    .map((project) => ({
+      ...project.data,
+      priority: project.data.priority || 0,
+    }))
+    .sort((a, b) => b.priority - a.priority)
 );
 ---
 
@@ -17,7 +19,10 @@ const projects = await getCollection("projects").then((projects) =>
       <h1 class="text-4xl font-bold">Projects</h1>
       <h3 class="">
         A full list of my projects can be found on my{" "}
-        <a class="text-blue-500 underline" href="https://github.com/zanbowie138">
+        <a
+          class="text-blue-500 underline"
+          href="https://github.com/zanbowie138"
+        >
           Github
         </a>
         .

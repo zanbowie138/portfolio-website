@@ -23,7 +23,7 @@ export default function LargeProjectCard({ project }: Props) {
       <img
         className="object-contain rounded-md w-full md:w-[400px]"
         src={project.image_links[0]}
-        alt="logo"
+        alt="Project Image"
       />
       <div className="w-full">
         <div className="flex flex-wrap items-center justify-between">

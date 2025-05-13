@@ -183,7 +183,7 @@ export default function ProjectCarousel({
         <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none" />
 
         {captions?.[current] && (
-          <div className="absolute bottom-0 left-0 w-full p-3 text-center text-neutral-200 pointer-events-none">
+          <div className="absolute bottom-0 left-0 w-full p-3 text-center text-neutral-200">
             <div dangerouslySetInnerHTML={{ __html: captions[current] }} />
           </div>
         )}
