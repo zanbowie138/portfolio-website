@@ -1,8 +1,7 @@
 import { IoMenu } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
-import { AnimatePresence } from "framer-motion";
 const links: { href: string; label: string }[] = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
@@ -86,7 +85,8 @@ export default function Header() {
                   animate={{ x: 0 }}
                   exit={{ x: 300 }}
                   transition={{
-                    type: "easeInOut",
+                    type: "tween",
+                    ease: "easeInOut",
                     duration: 0.2,
                   }}
                   className="fixed bg-neutral-800 text-neutral-200 top-0 right-0 h-full py-3 px-5 rounded-l-lg z-[999]"

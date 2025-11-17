@@ -1,7 +1,7 @@
 import { FaLinkedin } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaGithub } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useState } from "react";
 
 // Add the ContactLink interface
@@ -56,7 +56,7 @@ function ContactButton({ link, label, text, icon }: ContactLink) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       animate={{ scale: isHovered ? 1.2 : 1 }} // Grow entire button on hover
-      transition={{ type: "easeInOut", duration: 0.2 }}
+      transition={{ type: "tween", ease: "easeInOut", duration: 0.2 }}
     >
       <div className="flex items-center">{icon}</div>
       <motion.div className="absolute bottom-full mb-1 bg-gray-700 text-neutral-200 text-xs rounded p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">

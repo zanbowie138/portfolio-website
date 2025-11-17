@@ -36,7 +36,7 @@ export default function LargeProjectCard({ project }: Props) {
             <motion.div
               animate={{ y: isHovered ? -2 : 3, x: isHovered ? -5 : -10 }}
               initial={{ y: 3, x: -10 }}
-              transition={{ type: "easeInOut", duration: 0.2 }}
+              transition={{ type: "tween", ease: "easeInOut", duration: 0.2 }}
             >
               <MdArrowOutward size={20} className="ml-2 text-neutral-200 " />
             </motion.div>

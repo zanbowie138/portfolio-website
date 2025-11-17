@@ -1,6 +1,6 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function BackArrow() {
   const [arrowHover, setArrowHover] = useState(false);
