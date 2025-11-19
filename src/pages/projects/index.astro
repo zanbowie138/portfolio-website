@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import ProjectList from "@/components/project/ProjectList";
+import ProjectList from "@/components/project/ProjectList.astro";
 
 const projects = await getCollection("projects").then((projects) =>
   projects
@@ -28,8 +28,6 @@ const projects = await getCollection("projects").then((projects) =>
         .
       </h3>
     </div>
-    <div class="flex flex-col gap-4">
-      <ProjectList projects={projects} client:load />
-    </div>
+    <ProjectList projects={projects} />
   </div>
 </Layout>

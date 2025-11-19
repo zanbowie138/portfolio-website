@@ -1,11 +1,14 @@
 ---
 import Tag from "@/components/SmallTag";
 import type { ProjectProps } from "@/config/types";
+import { Image } from "astro:assets";
+import { getImage } from "@/utils/imageMap";
 
 interface Props {
   project: ProjectProps;
 }
 const { project } = Astro.props;
+const projectImage = getImage(project.image_links[0]);
 ---
 
 <div
@@ -13,10 +16,15 @@ const { project } = Astro.props;
 >
   <a href={`/projects/${project.id}`}>
     <div class="flex items-center gap-3 w-full h-full md:flex-col">
-      <img
+      <Image
         class="object-cover w-[120px] h-[90px] md:w-full md:h-[150px] rounded-md"
-        src={project.image_links[0]}
+        src={projectImage}
         alt="logo"
+        width={400}
+        height={300}
+        quality={100}
+        format="webp"
+        sizes="(max-width: 768px) 120px, 100vw"
       />
       <div class="text-left flex flex-col grow">
         <div

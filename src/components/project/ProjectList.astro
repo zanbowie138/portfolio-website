@@ -1,0 +1,19 @@
+---
+import LargeProjectCard from "./LargeProjectCard.astro";
+import type { ProjectProps } from "@/config/types";
+
+interface Props {
+  projects: ProjectProps[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="flex flex-col gap-4">
+  {projects.map((project) => (
+    <div key={project.id} class="relative">
+      <LargeProjectCard project={project} />
+    </div>
+  ))}
+</div>
+

@@ -7,6 +7,7 @@ import {
   IoMdPlay,
   IoMdClose,
 } from "react-icons/io";
+import { getImageUrl } from "@/utils/imageMap";
 
 interface ProjectCarouselProps {
   images: string[];
@@ -34,6 +35,7 @@ export default function ProjectCarousel({
   autoPlay = true,
   interval = 5000,
 }: ProjectCarouselProps) {
+  const imageUrls = images.map(getImageUrl);
   const [slideshowState, setSlideshowState] = useState<SlideshowState>({
     current: 0,
     isPlaying: autoPlay,
@@ -56,16 +58,16 @@ export default function ProjectCarousel({
   const handleNext = useCallback(() => {
     setSlideshowState((prev) => ({
       ...prev,
-      current: (prev.current + 1) % images.length,
+      current: (prev.current + 1) % imageUrls.length,
     }));
-  }, [images.length]);
+  }, [imageUrls.length]);
 
   const handlePrev = useCallback(() => {
     setSlideshowState((prev) => ({
       ...prev,
-      current: (prev.current - 1 + images.length) % images.length,
+      current: (prev.current - 1 + imageUrls.length) % imageUrls.length,
     }));
-  }, [images.length]);
+  }, [imageUrls.length]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -162,16 +164,16 @@ export default function ProjectCarousel({
             className="absolute inset-0 flex justify-center items-center p-3"
           >
             <motion.img
-              src={images[current]}
+              src={imageUrls[current]}
               alt={
-                captions ? captions[current] : `Project image ${current + 1}`
+                captions?.[current] || `Project image ${current + 1}`
               }
               className="h-full w-fit object-contain cursor-pointer"
               loading="eager"
               onClick={() =>
                 setModalState({
                   isOpen: true,
-                  image: images[current],
+                  image: imageUrls[current],
                   caption: captions?.[current],
                 })
               }
@@ -189,7 +191,7 @@ export default function ProjectCarousel({
         )}
 
         {/* Navigation Buttons */}
-        {images.length > 1 && (
+        {imageUrls.length > 1 && (
           <>
             <motion.button
               initial={{ transform: "translateY(-50%) scale(1)" }}
@@ -216,7 +218,7 @@ export default function ProjectCarousel({
         )}
 
         {/* Play/Pause Button */}
-        {autoPlay && images.length > 1 && (
+        {autoPlay && imageUrls.length > 1 && (
           <motion.button
             initial={{ opacity: 0.7 }}
             whileHover={{ opacity: 1 }}
@@ -235,10 +237,10 @@ export default function ProjectCarousel({
       </div>
 
       {/* Dots Indicator */}
-      {images.length > 1 && (
+      {imageUrls.length > 1 && (
         <div className="flex justify-center py-4">
           <div className="flex gap-2">
-            {images.map((_, index) => (
+            {imageUrls.map((_, index) => (
               <button
                 key={index}
                 onClick={() =>

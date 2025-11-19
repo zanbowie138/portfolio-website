@@ -1,0 +1,56 @@
+---
+import Tag from "@/components/LargeTag";
+import type { ProjectProps } from "@/config/types";
+import { Image } from "astro:assets";
+import { getImage } from "@/utils/imageMap";
+import OutwardArrow from "@/components/OutwardArrow";
+
+interface Props {
+  project: ProjectProps;
+}
+
+const { project } = Astro.props;
+const projectImage = getImage(project.image_links[0]);
+const cardId = `project-card-${project.id}`;
+---
+
+<a
+  href={`/projects/${project.id}`}
+  class="flex md:flex-row flex-col gap-5 p-4 rounded-md hover:shadow-lg hover:cursor-pointer outline outline-1 outline-neutral-700 group"
+  id={cardId}
+>
+  <Image
+    class="object-contain rounded-md w-full md:w-[400px]"
+    src={projectImage}
+    alt="Project Image"
+    width={400}
+    height={300}
+    quality={90}
+    format="webp"
+  />
+  <div class="w-full">
+    <div class="flex flex-wrap items-center justify-between">
+      <div class="flex items-center gap-1">
+        <h3 class="text-3xl font-bold flex items-center group-hover:text-slate-500 text-neutral-200 transition-colors">
+          {project.title}
+        </h3>
+        <OutwardArrow parentId={cardId} client:load />
+      </div>
+      <h2 class="text-md text-neutral-400 whitespace-nowrap">
+        {project.date_range}
+      </h2>
+    </div>
+    <p
+      class="text-md"
+      set:html={project.description}
+    />
+    {project.tags && project.tags.length > 0 && (
+      <div class="flex gap-2 mt-4 flex-wrap">
+        {project.tags.map((tag) => (
+          <Tag text={tag} />
+        ))}
+      </div>
+    )}
+  </div>
+</a>
+
