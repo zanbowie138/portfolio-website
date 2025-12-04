@@ -1,7 +1,6 @@
 ---
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WaveBackground from "@/components/WaveBackground";
 const { title } = Astro.props;
 ---
 
@@ -24,9 +23,8 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="bg-zinc-900 justify-center flex min-h-screen">
-    <WaveBackground client:load />
     <div
-      class="w-full lg:h-fit lg:w-[950px] lg:my-4 flex flex-col text-neutral-200 relative z-10 backdrop-blur-md bg-zinc-900/40 border border-white/10 rounded-lg shadow-2xl"
+      class="w-full lg:h-fit lg:w-[950px] lg:my-4 flex flex-col text-neutral-200"
     >
       <Header client:load />
       <div class="lg:rounded-b-md flex flex-col grow">

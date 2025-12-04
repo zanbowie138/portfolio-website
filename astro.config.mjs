@@ -16,7 +16,4 @@ export default defineConfig({
             ]
         }
     ), tailwind()],
-    vite: {
-        assetsInclude: ['**/*.glsl'],
-    },
 });
