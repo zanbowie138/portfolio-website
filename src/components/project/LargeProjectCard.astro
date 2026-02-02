@@ -18,6 +18,7 @@ const cardId = `project-card-${project.id}`;
   href={`/projects/${project.id}`}
   class="flex md:flex-row flex-col gap-5 p-4 rounded-md hover:shadow-lg hover:cursor-pointer outline outline-1 outline-neutral-700 group"
   id={cardId}
+  data-astro-prefetch
 >
   <Image
     class="object-contain rounded-md w-full md:w-[400px]"
@@ -27,25 +28,27 @@ const cardId = `project-card-${project.id}`;
     height={300}
     quality={90}
     format="webp"
+    transition:name={`${project.id}-image`}
   />
   <div class="w-full">
     <div class="flex flex-wrap items-center justify-between">
       <div class="flex items-center gap-1">
-        <h3 class="text-3xl font-bold flex items-center group-hover:text-slate-500 text-neutral-200 transition-colors">
+        <h3 class="text-3xl font-bold flex items-center group-hover:text-slate-500 text-neutral-200 transition-colors" transition:name={`${project.id}-title`}>
           {project.title}
         </h3>
         <OutwardArrow parentId={cardId} client:load />
       </div>
-      <h2 class="text-md text-neutral-400 whitespace-nowrap">
+      <h2 class="text-md text-neutral-400 whitespace-nowrap" transition:name={`${project.id}-date`}>
         {project.date_range}
       </h2>
     </div>
     <p
       class="text-md"
       set:html={project.description}
+      transition:name={`${project.id}-description`}
     />
     {project.tags && project.tags.length > 0 && (
-      <div class="flex gap-2 mt-4 flex-wrap">
+      <div class="flex gap-2 mt-4 flex-wrap" transition:name={`${project.id}-tags`}>
         {project.tags.map((tag) => (
           <Tag text={tag} />
         ))}

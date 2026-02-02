@@ -5,7 +5,8 @@ import BackArrow from "@/components/BackArrow";
 import ProjectCarousel from "@/components/project/ProjectCarousel";
 import Tag from "@/components/SmallTag";
 import Prose from "@/components/Prose.astro";
-import StringRender from "@/components/StringRender";
+import { Image } from "astro:assets";
+import { getImage } from "@/utils/imageMap";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -18,16 +19,48 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const project = post.data;
+const projectImage = getImage(project.image_links[0]);
 ---
 
 <Layout>
   <div class="p-5">
     <BackArrow client:load />
-    <ProjectCarousel
-      images={project.image_links}
-      captions={project.image_captions}
-      client:load
-    />
+    <div class="relative">
+      <div
+        class="absolute inset-0 w-full aspect-[16/9] max-h-[500px] overflow-hidden bg-black rounded-md z-10 transition-opacity duration-500 flex justify-center items-center p-3"
+        id="transition-static-image"
+      >
+        <Image
+          class="h-full w-fit object-contain"
+          src={projectImage}
+          alt={project.title}
+          width={800}
+          height={450}
+          quality={90}
+          format="webp"
+          transition:name={`${project.id}-image`}
+        />
+      </div>
+      <ProjectCarousel
+        images={project.image_links}
+        captions={project.image_captions}
+        client:load
+      />
+    </div>
+    <script>
+      document.addEventListener('astro:after-swap', () => {
+        // Wait for transition to complete before fading out static image
+        const staticImage = document.getElementById('transition-static-image');
+        if (staticImage) {
+          setTimeout(() => {
+            staticImage.style.opacity = '0';
+            setTimeout(() => {
+              staticImage.remove();
+            }, 500);
+          }, 200);
+        }
+      });
+    </script>
     <div class="md:px-[10px] max-w-[850px] mx-auto">
       <div class="flex flex-col my-3">
         <h3
@@ -36,7 +69,7 @@ const project = post.data;
         >
           {project.title}
         </h3>
-        <h2 class="text-neutral-400 text-lg">{project.date_range}</h2>
+        <h2 class="text-neutral-400 text-lg" transition:name={`${project.id}-date`}>{project.date_range}</h2>
       </div>
       <div
         class="flex flex-col sm:flex-row-reverse gap-3 my-2 text-neutral-200"
@@ -47,7 +80,7 @@ const project = post.data;
               <span class="font-semibold text-xl text-neutral-200">
                 Technologies
               </span>
-              <div class="flex gap-1 mt-2 flex-wrap">
+              <div class="flex gap-1 mt-2 flex-wrap" transition:name={`${project.id}-tags`}>
                 {project.tags.map((tag) => (
                   <Tag text={tag} />
                 ))}
@@ -57,9 +90,10 @@ const project = post.data;
         }
         <div class="grow">
           <span class="font-semibold text-xl">Description</span>
-          <StringRender
-            text={project.description}
-            className="text-neutral-200 text-lg"
+          <p
+            class="text-neutral-200 text-lg"
+            set:html={project.description}
+            transition:name={`${project.id}-description`}
           />
         </div>
       </div>
