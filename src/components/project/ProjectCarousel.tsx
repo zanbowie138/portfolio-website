@@ -8,6 +8,7 @@ import {
   IoMdClose,
 } from "react-icons/io";
 import { getImageUrl } from "@/utils/imageMap";
+import ImageTransition from "@/components/ImageTransition";
 
 interface ProjectCarouselProps {
   images: string[];
@@ -164,32 +165,27 @@ export default function ProjectCarousel({
         role="region"
         aria-label="Project images carousel"
       >
-        <AnimatePresence initial={false} mode="wait">
-          <motion.div
-            key={`${current}-${transitionCount}`}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -200 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="absolute inset-0 flex justify-center items-center p-3"
-          >
-            <motion.img
-              src={imageUrls[current]}
-              alt={
-                captions?.[current] || `Project image ${current + 1}`
-              }
-              className="h-full w-fit object-contain cursor-pointer"
-              loading="eager"
-              onClick={() =>
-                setModalState({
-                  isOpen: true,
-                  image: imageUrls[current],
-                  caption: captions?.[current],
-                })
-              }
-            />
-          </motion.div>
-        </AnimatePresence>
+        <div className="absolute inset-0">
+          <ImageTransition
+            images={imageUrls}
+            currentIndex={current}
+            width={100}
+            height={60}
+          />
+        </div>
+
+        {/* Clickable overlay for modal */}
+        <div
+          className="absolute inset-0 cursor-pointer"
+          onClick={() =>
+            setModalState({
+              isOpen: true,
+              image: imageUrls[current],
+              caption: captions?.[current],
+            })
+          }
+          aria-label="Open enlarged view"
+        />
 
         {/* Gradient overlay for caption visibility */}
         <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none" />
