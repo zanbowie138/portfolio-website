@@ -22,6 +22,7 @@ interface SlideshowState {
   isManuallyPaused: boolean;
   touchStart: number;
   touchEnd: number;
+  transitionCount: number;
 }
 
 interface ModalState {
@@ -43,6 +44,7 @@ export default function ProjectCarousel({
     isManuallyPaused: false,
     touchStart: 0,
     touchEnd: 0,
+    transitionCount: 0,
   });
 
   const [modalState, setModalState] = useState<ModalState>({
@@ -61,6 +63,7 @@ export default function ProjectCarousel({
     setSlideshowState((prev) => ({
       ...prev,
       current: (prev.current + 1) % imageUrls.length,
+      transitionCount: prev.transitionCount + 1,
     }));
   }, [imageUrls.length]);
 
@@ -68,6 +71,7 @@ export default function ProjectCarousel({
     setSlideshowState((prev) => ({
       ...prev,
       current: (prev.current - 1 + imageUrls.length) % imageUrls.length,
+      transitionCount: prev.transitionCount + 1,
     }));
   }, [imageUrls.length]);
 
@@ -144,13 +148,13 @@ export default function ProjectCarousel({
     };
   }, [modalState.isOpen]);
 
-  const { current, isPlaying } = slideshowState;
+  const { current, isPlaying, transitionCount } = slideshowState;
 
   return (
     <>
       <div
         ref={carouselRef}
-        className="relative w-full aspect-[16/9] max-h-[500px] overflow-hidden bg-black rounded-md select-none" // Changed h-96 to aspect-[16/9] and added max-h-[500px]
+        className="relative w-full aspect-[16/9] max-h-[500px] overflow-hidden bg-black rounded-md select-none outline-none focus:outline-none"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
@@ -162,7 +166,7 @@ export default function ProjectCarousel({
       >
         <AnimatePresence initial={false} mode="wait">
           <motion.div
-            key={current}
+            key={`${current}-${transitionCount}`}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -200 }}
@@ -251,7 +255,11 @@ export default function ProjectCarousel({
               <button
                 key={index}
                 onClick={() =>
-                  setSlideshowState((prev) => ({ ...prev, current: index }))
+                  setSlideshowState((prev) => ({
+                    ...prev,
+                    current: index,
+                    transitionCount: prev.transitionCount + 1,
+                  }))
                 }
                 className={`w-3 h-3 rounded-full transition-colors duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   current === index
@@ -267,44 +275,61 @@ export default function ProjectCarousel({
       )}
 
       {/* Modal for Enlarged Image */}
-      {modalState.isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-          onClick={closeModal}
-          aria-modal="true"
-          role="dialog"
-          aria-labelledby="modal-caption"
-        >
+      <AnimatePresence>
+        {modalState.isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="relative max-w-3xl w-full max-h-[90vh] p-4 flex flex-col items-center"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-xl"
+            onClick={closeModal}
+            aria-modal="true"
+            role="dialog"
+            aria-labelledby="modal-caption"
           >
-            <img
-              src={modalState.image}
-              alt="Enlarged project image"
-              className="max-w-full max-h-[75vh] object-contain rounded-md"
-            />
-            {modalState.caption && (
-              <div
-                id="modal-caption"
-                className="mt-3 text-center text-neutral-300 p-2 w-full overflow-auto"
-                dangerouslySetInnerHTML={{ __html: modalState.caption }}
-              />
-            )}
-            <button
-              onClick={closeModal}
-              className="absolute top-8 right-8 text-neutral-300 hover:text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Close enlarged image view"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 10 }}
+              transition={{
+                duration: 0.3,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="relative max-w-6xl w-full max-h-[95vh] p-4 md:p-8 flex flex-col items-center"
             >
-              <IoMdClose size={24} />
-            </button>
+              <div className="relative w-full flex justify-center">
+                <img
+                  src={modalState.image}
+                  alt="Enlarged project image"
+                  className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+              {modalState.caption && (
+                <div
+                  id="modal-caption"
+                  className="mt-4 text-center text-neutral-200 p-3 w-full max-w-3xl"
+                  dangerouslySetInnerHTML={{ __html: modalState.caption }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              )}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.15 }}
+                whileHover={{ scale: 1.1, backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+                whileTap={{ scale: 0.95 }}
+                onClick={closeModal}
+                className="absolute -top-2 -right-2 md:top-4 md:right-4 text-white bg-black/50 hover:bg-black/70 p-2.5 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white shadow-lg"
+                aria-label="Close enlarged image view"
+              >
+                <IoMdClose size={24} />
+              </motion.button>
+            </motion.div>
           </motion.div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }
