@@ -19,6 +19,7 @@ interface ProjectCarouselProps {
 interface SlideshowState {
   current: number;
   isPlaying: boolean;
+  isManuallyPaused: boolean;
   touchStart: number;
   touchEnd: number;
 }
@@ -39,6 +40,7 @@ export default function ProjectCarousel({
   const [slideshowState, setSlideshowState] = useState<SlideshowState>({
     current: 0,
     isPlaying: autoPlay,
+    isManuallyPaused: false,
     touchStart: 0,
     touchEnd: 0,
   });
@@ -124,11 +126,15 @@ export default function ProjectCarousel({
   };
 
   const handleMouseEnter = () => {
-    if (autoPlay) setSlideshowState((prev) => ({ ...prev, isPlaying: false }));
+    if (autoPlay && !slideshowState.isManuallyPaused) {
+      setSlideshowState((prev) => ({ ...prev, isPlaying: false }));
+    }
   };
 
   const handleMouseLeave = () => {
-    if (autoPlay) setSlideshowState((prev) => ({ ...prev, isPlaying: true }));
+    if (autoPlay && !slideshowState.isManuallyPaused) {
+      setSlideshowState((prev) => ({ ...prev, isPlaying: true }));
+    }
   };
 
   useEffect(() => {
@@ -226,6 +232,7 @@ export default function ProjectCarousel({
               setSlideshowState((prev) => ({
                 ...prev,
                 isPlaying: !prev.isPlaying,
+                isManuallyPaused: prev.isPlaying,
               }))
             }
             className="absolute top-2 right-2 md:top-4 md:right-4 bg-neutral-900/50 hover:bg-neutral-900/80 text-neutral-200 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
